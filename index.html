@@ -44,8 +44,14 @@
         </div>
         <div class="field">
           <label for="senha">Senha</label>
-          <input id="senha" type="password" placeholder="Digite sua senha">
+          <div class="password-field">
+            <input id="senha" type="password" placeholder="Digite sua senha">
+            <button class="password-toggle" type="button" aria-label="Mostrar senha" aria-pressed="false" onclick="alternarSenha('senha', this)">Ver</button>
+          </div>
         </div>
+      </div>
+      <div class="auth-links">
+        <a href="recuperar-senha.html">Esqueceu a senha?</a>
       </div>
       <div class="form-actions">
         <button class="btn" onclick="login()">Entrar</button>
@@ -59,6 +65,17 @@
 
   <script src="api.js"></script>
   <script>
+    function alternarSenha(inputId, button) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+
+      const mostrando = input.type === "text";
+      input.type = mostrando ? "password" : "text";
+      button.textContent = mostrando ? "Ver" : "Ocultar";
+      button.setAttribute("aria-label", mostrando ? "Mostrar senha" : "Ocultar senha");
+      button.setAttribute("aria-pressed", String(!mostrando));
+    }
+
     async function login() {
       const user = document.getElementById("usuario").value.trim();
       const pass = document.getElementById("senha").value.trim();

@@ -329,6 +329,46 @@ textarea:focus {
   font-weight: 700;
 }
 
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 112px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.password-toggle:hover {
+  background: rgba(53, 212, 255, 0.12);
+  border-color: rgba(53, 212, 255, 0.32);
+}
+
+.auth-links {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.auth-links a {
+  color: var(--accent);
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
 .tipo {
   display: flex;
   gap: 12px;

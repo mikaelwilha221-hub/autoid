@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Recuperar Senha</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-shell" style="grid-template-columns:minmax(0,1fr);max-width:720px;">
+    <section class="auth-form">
+      <div class="brand-lockup">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Recuperacao de acesso</p>
+        </div>
+      </div>
+      <h1>Esqueceu sua senha?</h1>
+      <p>Informe seu e-mail para solicitar a recuperacao de acesso. Nesta versao, a solicitacao fica registrada localmente para validacao do fluxo.</p>
+      <div class="field-group">
+        <div class="field">
+          <label for="email-recuperacao">E-mail cadastrado</label>
+          <input id="email-recuperacao" type="email" placeholder="Digite seu e-mail">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn" type="button" onclick="solicitarRecuperacao()">Solicitar recuperacao</button>
+        <a class="btn-ghost" href="index.html">Voltar ao login</a>
+      </div>
+      <p id="msg-recuperacao" class="feedback"></p>
+    </section>
+  </div>
+
+  <script>
+    function solicitarRecuperacao() {
+      const email = document.getElementById("email-recuperacao").value.trim();
+      const msg = document.getElementById("msg-recuperacao");
+
+      if (!email) {
+        msg.textContent = "Informe o e-mail cadastrado para continuar.";
+        return;
+      }
+
+      localStorage.setItem("ultimaRecuperacaoSenha", JSON.stringify({
+        email,
+        requestedAt: new Date().toISOString()
+      }));
+
+      msg.textContent = "Solicitacao registrada. Na proxima etapa, o ideal e integrar envio real de e-mail.";
+    }
+  </script>
+</body>
+</html>
