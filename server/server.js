@@ -43,12 +43,13 @@ app.post("/api/auth/register", async (req, res) => {
       roleProfile,
       password
     } = req.body;
+    const normalizedEmail = String(email || "").trim().toLowerCase();
 
-    if (!typePerson || !name || !document || !city || !state || !zipCode || !street || !number || !district || !email || !roleProfile || !password) {
+    if (!typePerson || !name || !document || !city || !state || !zipCode || !street || !number || !district || !normalizedEmail || !roleProfile || !password) {
       return res.status(400).json({ error: "Dados obrigatorios nao informados." });
     }
 
-    const existing = await get("SELECT id FROM users WHERE email = ? OR document = ?", [email, document]);
+    const existing = await get("SELECT id FROM users WHERE email = ? OR document = ?", [normalizedEmail, document]);
     if (existing) {
       return res.status(409).json({ error: "Ja existe cadastro com este e-mail ou documento." });
     }
@@ -58,7 +59,7 @@ app.post("/api/auth/register", async (req, res) => {
       `INSERT INTO users (
         type_person, name, document, phone, city, state, zip_code, street, number, district, complement, email, role_profile, password_hash
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [typePerson, name, document, phone || "", city, state, zipCode, street, number, district, complement || "", email, roleProfile, passwordHash]
+      [typePerson, name, document, phone || "", city, state, zipCode, street, number, district, complement || "", normalizedEmail, roleProfile, passwordHash]
     );
 
     const user = await get("SELECT id, type_person, name, document, email, role_profile FROM users WHERE id = ?", [result.id]);
@@ -85,7 +86,7 @@ app.post("/api/auth/register", async (req, res) => {
             district,
             complement || "",
             "Prestador cadastrado automaticamente pelo portal unico.",
-            email
+            normalizedEmail
           ]
         );
       }
@@ -100,7 +101,8 @@ app.post("/api/auth/register", async (req, res) => {
 app.post("/api/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await get("SELECT * FROM users WHERE email = ?", [email]);
+    const normalizedEmail = String(email || "").trim().toLowerCase();
+    const user = await get("SELECT * FROM users WHERE email = ?", [normalizedEmail]);
 
     if (!user) {
       return res.status(401).json({ error: "Credenciais invalidas." });

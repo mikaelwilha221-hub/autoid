@@ -76,7 +76,7 @@
     }
 
     async function login() {
-      const email = document.getElementById("email").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
       const senha = document.getElementById("senha").value.trim();
       const erro = document.getElementById("erro-login");
       const box = document.querySelector(".auth-form");
@@ -96,7 +96,7 @@
         }));
         window.location.href = "empresa.html";
       } catch (error) {
-        erro.textContent = "E-mail ou senha incorretos.";
+        erro.textContent = error.message || "E-mail ou senha incorretos.";
         box.classList.add("tremer");
         setTimeout(() => box.classList.remove("tremer"), 300);
       }

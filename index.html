@@ -77,7 +77,7 @@
     }
 
     async function login() {
-      const user = document.getElementById("usuario").value.trim();
+      const user = document.getElementById("usuario").value.trim().toLowerCase();
       const pass = document.getElementById("senha").value.trim();
       const erro = document.getElementById("erro-login");
       erro.textContent = "";
@@ -95,7 +95,7 @@
           ? "empresa.html"
           : "dashboard.html";
       } catch (error) {
-        erro.textContent = "E-mail ou senha incorretos.";
+        erro.textContent = error.message || "E-mail ou senha incorretos.";
       }
     }
   </script>

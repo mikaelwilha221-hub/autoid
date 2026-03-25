@@ -168,7 +168,7 @@
       const numero = document.getElementById("numero").value.trim();
       const bairro = document.getElementById("bairro").value.trim();
       const complemento = document.getElementById("complemento").value.trim();
-      const email = document.getElementById("email").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
       const perfilUso = document.getElementById("perfilUso").value;
       const senha = document.getElementById("senha").value;
       const confirmar = document.getElementById("confirmar").value;
@@ -230,23 +230,7 @@
 
         window.location.href = "index.html";
       } catch (error) {
-        localStorage.setItem("usuarioPortal", JSON.stringify({
-          tipoPessoa: tipoUsuario,
-          nome,
-          documento,
-          telefone,
-          cidade,
-          estado,
-          cep,
-          logradouro,
-          numero,
-          bairro,
-          complemento,
-          email,
-          perfilUso,
-          senha
-        }));
-        window.location.href = "index.html";
+        erro.textContent = error.message || "Nao foi possivel concluir o cadastro agora.";
       }
     }
 
