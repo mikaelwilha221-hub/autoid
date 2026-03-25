@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Relatorios</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarRelatorio()" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Relatorios financeiros</p>
+        </div>
+      </div>
+      <ul>
+        <li onclick="window.location.href='empresa.html'">Dashboard</li>
+        <li onclick="window.location.href='clientes.html'">Clientes</li>
+        <li onclick="window.location.href='servicos.html'">Servicos</li>
+        <li onclick="window.location.href='produtos.html'">Produtos</li>
+        <li onclick="window.location.href='orcamentos.html'">Orcamentos</li>
+        <li onclick="window.location.href='financeiro.html'">Financeiro</li>
+        <li class="active">Relatorios</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-title">
+          <h1>Relatorio de faturamento</h1>
+          <p>Indicadores consolidados a partir dos servicos registrados em cada cliente.</p>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <div class="metric-card">
+          <span>Total geral</span>
+          <strong id="totalGeral">R$ 0,00</strong>
+        </div>
+        <div class="metric-card">
+          <span>Faturamento hoje</span>
+          <strong id="totalHoje">R$ 0,00</strong>
+        </div>
+        <div class="metric-card">
+          <span>Clientes com historico</span>
+          <strong id="clientesAtivos">0</strong>
+        </div>
+        <div class="metric-card">
+          <span>Registros lancados</span>
+          <strong id="qtdServicos">0</strong>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Desempenho por cliente</h3>
+            <p>Resumo financeiro por cadastro armazenado localmente.</p>
+          </div>
+        </div>
+        <div id="listaRelatorio" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

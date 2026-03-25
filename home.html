@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Plataforma Inteligente</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="home-page">
+  <div class="hero-shell">
+    <header class="hero-header">
+      <div class="hero-brand">
+        <div class="logo">
+          <img src="img/logo.png" alt="Logo AutoID">
+        </div>
+        <div class="hero-brand-copy">
+          <strong>AutoID</strong>
+          <span>Plataforma para empresas, prestadores e usuarios</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a class="btn-ghost" href="cadastro-usuario.html">Criar cadastro</a>
+        <a class="btn" href="index.html">Entrar na plataforma</a>
+      </div>
+    </header>
+
+    <main class="hero-main">
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <span class="eyebrow">Gestao multissetorial</span>
+          <h1 class="title">Um sistema unico para vender, prestar, contratar e gerenciar servicos ou produtos.</h1>
+          <p>
+            O AutoID conecta empresas e usuarios em um ambiente unico. A empresa pode cadastrar clientes,
+            servicos, produtos, ordens, garantias, orcamentos e operacoes financeiras. O usuario pode
+            contratar, prestar ou atuar nos dois lados dentro da mesma plataforma.
+          </p>
+          <div class="typing-line">
+            <span id="frase"></span><span class="cursor">|</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn" href="index.html">Entrar na plataforma</a>
+            <a class="btn-secondary" href="cadastro-usuario.html">Criar cadastro unico</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>24h</strong>
+              <span>Historico operacional acessivel</span>
+            </div>
+            <div class="hero-stat">
+              <strong>360</strong>
+              <span>Visao completa de vendas e servicos</span>
+            </div>
+            <div class="hero-stat">
+              <strong>+ Controle</strong>
+              <span>Operacao organizada em um so lugar</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="hero-side">
+        <div class="robo-card">
+          <div class="robo" aria-hidden="true">
+            <div class="olhos">
+              <span class="olho"></span>
+              <span class="olho"></span>
+            </div>
+            <div class="boca"></div>
+          </div>
+          <p class="section-text">Tecnologia aplicada a atendimento, relacionamento, historico, financeiro e gestao operacional.</p>
+        </div>
+
+        <div class="card-grid">
+          <a href="empresa.html" class="entry-card">
+            <span class="entry-icon"><i class="fas fa-building"></i></span>
+            <strong>Painel operacional</strong>
+            <p>Cadastre servicos e produtos, controle clientes, ordens, orcamentos, garantias e financeiro.</p>
+          </a>
+
+          <a href="index.html" class="entry-card">
+            <span class="entry-icon"><i class="fas fa-user"></i></span>
+            <strong>Portal do usuario</strong>
+            <p>Cadastre-se como PF ou PJ e escolha se vai contratar, prestar ou atuar dos dois lados.</p>
+          </a>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const texto = "Conectando usuarios e empresas em qualquer segmento.";
+    let indice = 0;
+
+    function digitar() {
+      const frase = document.getElementById("frase");
+      if (!frase || indice >= texto.length) return;
+      frase.textContent += texto.charAt(indice);
+      indice += 1;
+      setTimeout(digitar, 38);
+    }
+
+    digitar();
+  </script>
+</body>
+</html>

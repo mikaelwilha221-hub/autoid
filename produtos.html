@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Produtos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarProdutos()" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="menu">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Gestao empresarial</p>
+        </div>
+      </div>
+      <p class="menu-label">Navegacao principal</p>
+      <ul>
+        <li onclick="window.location.href='empresa.html'">Dashboard</li>
+        <li onclick="window.location.href='clientes.html'">Clientes</li>
+        <li onclick="window.location.href='servicos.html'">Servicos</li>
+        <li class="ativo">Produtos</li>
+        <li onclick="window.location.href='orcamentos.html'">Orcamentos</li>
+        <li onclick="window.location.href='financeiro.html'">Financeiro</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+      </ul>
+    </aside>
+
+    <main class="conteudo">
+      <section class="topo">
+        <div>
+          <h2 class="titulo-topo">Catalogo de produtos</h2>
+          <p class="muted">Organize produtos, categorias, estoque e precos em um unico painel.</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn-ghost" href="empresa.html">Voltar ao painel</a>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Novo produto</h3>
+              <p>Cadastre produtos para venda, reposicao ou uso operacional.</p>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="produtoNome">Nome do produto</label>
+              <input id="produtoNome" placeholder="Ex.: assinatura, peca, equipamento, item">
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="produtoCategoria">Categoria</label>
+                <input id="produtoCategoria" placeholder="Categoria do produto">
+              </div>
+              <div class="field">
+                <label for="produtoEstoque">Estoque</label>
+                <input id="produtoEstoque" placeholder="Quantidade disponivel">
+              </div>
+            </div>
+            <div class="field">
+              <label for="produtoValor">Preco</label>
+              <input id="produtoValor" placeholder="0,00">
+            </div>
+            <div class="field">
+              <label for="produtoDescricao">Descricao</label>
+              <textarea id="produtoDescricao" placeholder="Detalhe aplicacao, uso e observacoes do produto"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" onclick="salvarProdutoCatalogo()">Salvar produto</button>
+          </div>
+          <div id="msgProduto" class="feedback"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Indicadores do estoque</h3>
+              <p>Visao geral dos produtos cadastrados.</p>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric-card">
+              <span>Total de produtos</span>
+              <strong id="totalProdutosCatalogo">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Categorias</span>
+              <strong id="totalCategoriasProduto">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Estoque total</span>
+              <strong id="estoqueTotalProdutos">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Valor medio</span>
+              <strong id="mediaProduto">R$ 0,00</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Produtos cadastrados</h3>
+            <p>Itens que podem entrar em vendas, orcamentos e operacoes da empresa.</p>
+          </div>
+        </div>
+        <div id="listaProdutos" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

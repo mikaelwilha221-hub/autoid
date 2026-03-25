@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Cadastro de Empresa</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <section class="auth-panel">
+      <div class="brand-lockup">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Cadastro empresarial</p>
+        </div>
+      </div>
+      <span class="eyebrow">Implantacao rapida</span>
+      <h1 class="title" style="font-size:clamp(2rem,4vw,3.1rem);margin-top:18px;">Crie sua conta e estruture o atendimento com mais organizacao.</h1>
+      <p class="section-text" style="margin-top:16px;">
+        Cadastre sua operacao para iniciar o controle de clientes, ordens de servico e dados de relacionamento.
+      </p>
+      <div class="auth-highlight">
+        <div class="highlight-card">
+          <strong>Perfil PF ou PJ</strong>
+          <span class="muted">Fluxo simples para adaptar o cadastro ao tipo da operacao.</span>
+        </div>
+        <div class="highlight-card">
+          <strong>Base pronta para crescer</strong>
+          <span class="muted">Estrutura visual preparada para apresentar melhor sua marca e seus dados.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-form">
+      <h2>Cadastro empresarial legado</h2>
+      <p>O fluxo recomendado agora e o cadastro unico da plataforma. Esta tela pode ser usada como apoio temporario.</p>
+
+      <div class="tipo">
+        <button type="button" class="btn-secondary" onclick="selecionarTipo('pf')" id="btn-pf">Pessoa Fisica</button>
+        <button type="button" class="btn-secondary" onclick="selecionarTipo('pj')" id="btn-pj">Pessoa Juridica</button>
+      </div>
+
+      <div class="field-group">
+        <div class="field">
+          <label for="nome">Nome ou razao social</label>
+          <input type="text" id="nome" placeholder="Nome / Razao social">
+        </div>
+        <div class="field">
+          <label for="documento">CPF ou CNPJ</label>
+          <input type="text" id="documento" placeholder="CPF / CNPJ">
+        </div>
+        <div class="form-actions" style="margin-top:-6px;">
+          <button type="button" class="btn-secondary" id="buscarCnpjEmpresa" onclick="buscarCnpjEmpresa()">Buscar dados do CNPJ</button>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="segmento">Segmento principal</label>
+            <input id="segmento" type="text" placeholder="Ex.: tecnologia, saude, manutencao">
+          </div>
+          <div class="field">
+            <label for="cidade">Cidade</label>
+            <input id="cidade" type="text" placeholder="Cidade de atendimento">
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="estado">Estado</label>
+            <input id="estado" type="text" placeholder="UF">
+          </div>
+          <div class="field">
+            <label for="cep">CEP</label>
+            <input id="cep" type="text" placeholder="00000-000">
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="logradouro">Endereco</label>
+            <input id="logradouro" type="text" placeholder="Rua, avenida ou logradouro">
+          </div>
+          <div class="field">
+            <label for="numero">Numero</label>
+            <input id="numero" type="text" placeholder="Numero">
+          </div>
+        </div>
+        <div class="field">
+          <label for="bairro">Bairro</label>
+          <input id="bairro" type="text" placeholder="Bairro">
+        </div>
+        <div class="field">
+          <label for="complemento">Complemento</label>
+          <input id="complemento" type="text" placeholder="Sala, bloco, referencia ou complemento">
+        </div>
+        <div class="field">
+          <label for="descricao">Descricao da empresa</label>
+          <textarea id="descricao" placeholder="Descreva sua empresa, servicos e diferenciais"></textarea>
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="empresa@autoid.com">
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="senha">Senha</label>
+            <input id="senha" type="password" placeholder="Crie uma senha">
+          </div>
+          <div class="field">
+            <label for="confirmar">Confirmar senha</label>
+            <input id="confirmar" type="password" placeholder="Repita a senha">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" onclick="cadastrar()">Cadastrar</button>
+        <a class="btn-secondary" href="cadastro-usuario.html">Usar cadastro unico</a>
+        <a class="btn-ghost" href="login-empresa.html">Ja tenho conta</a>
+      </div>
+      <p id="erro-login" class="erro-login"></p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let tipoSelecionado = "";
+
+    function selecionarTipo(tipo) {
+      tipoSelecionado = tipo;
+
+      const nome = document.getElementById("nome");
+      const doc = document.getElementById("documento");
+      const btnPF = document.getElementById("btn-pf");
+      const btnPJ = document.getElementById("btn-pj");
+
+      if (tipo === "pf") {
+        nome.placeholder = "Nome completo";
+        doc.placeholder = "CPF";
+        btnPF.classList.add("ativo");
+        btnPJ.classList.remove("ativo");
+        return;
+      }
+
+      nome.placeholder = "Razao social";
+      doc.placeholder = "CNPJ";
+      btnPJ.classList.add("ativo");
+      btnPF.classList.remove("ativo");
+    }
+
+    function cadastrar() {
+      const erro = document.getElementById("erro-login");
+      const nome = document.getElementById("nome").value.trim();
+      const documento = document.getElementById("documento").value.trim();
+      const segmento = document.getElementById("segmento").value.trim();
+      const cidade = document.getElementById("cidade").value.trim();
+      const estado = document.getElementById("estado").value.trim();
+      const cep = document.getElementById("cep").value.trim();
+      const logradouro = document.getElementById("logradouro").value.trim();
+      const numero = document.getElementById("numero").value.trim();
+      const bairro = document.getElementById("bairro").value.trim();
+      const complemento = document.getElementById("complemento").value.trim();
+      const descricao = document.getElementById("descricao").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value;
+      const confirmar = document.getElementById("confirmar").value;
+
+      if (!tipoSelecionado) {
+        erro.textContent = "Selecione o tipo de cadastro.";
+        return;
+      }
+
+      if (!nome || !documento || !segmento || !cidade || !estado || !cep || !logradouro || !numero || !bairro || !descricao || !email || !senha) {
+        erro.textContent = "Preencha todos os campos obrigatorios.";
+        return;
+      }
+
+      if (senha !== confirmar) {
+        erro.textContent = "As senhas nao coincidem.";
+        return;
+      }
+
+      const empresa = {
+        tipo: tipoSelecionado,
+        nome,
+        documento,
+        segmento,
+        cidade,
+        estado,
+        cep,
+        logradouro,
+        numero,
+        bairro,
+        complemento,
+        descricao,
+        email,
+        senha
+      };
+      localStorage.setItem("empresa", JSON.stringify(empresa));
+      window.location.href = "login-empresa.html";
+    }
+
+    function buscarCnpjEmpresa() {
+      if (tipoSelecionado !== "pj") {
+        document.getElementById("erro-login").textContent = "Selecione Pessoa Juridica para consultar CNPJ.";
+        return;
+      }
+      buscarDadosCnpj({
+        documentoId: "documento",
+        nomeId: "nome",
+        segmentoId: "segmento",
+        emailId: "email",
+        cidadeId: "cidade",
+        estadoId: "estado",
+        cepId: "cep",
+        logradouroId: "logradouro",
+        numeroId: "numero",
+        bairroId: "bairro",
+        complementoId: "complemento",
+        descricaoId: "descricao",
+        errorId: "erro-login",
+        buttonId: "buscarCnpjEmpresa"
+      });
+    }
+  </script>
+</body>
+</html>

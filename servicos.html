@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Servicos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarServicos()" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="menu">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Gestao empresarial</p>
+        </div>
+      </div>
+      <p class="menu-label">Navegacao principal</p>
+      <ul>
+        <li onclick="window.location.href='empresa.html'">Dashboard</li>
+        <li onclick="window.location.href='clientes.html'">Clientes</li>
+        <li class="ativo">Servicos</li>
+        <li onclick="window.location.href='produtos.html'">Produtos</li>
+        <li onclick="window.location.href='orcamentos.html'">Orcamentos</li>
+        <li onclick="window.location.href='financeiro.html'">Financeiro</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+      </ul>
+    </aside>
+
+    <main class="conteudo">
+      <section class="topo">
+        <div>
+          <h2 class="titulo-topo">Catalogo de servicos</h2>
+          <p class="muted">Cadastre servicos de qualquer segmento com categoria, prazo e valor base.</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn-ghost" href="empresa.html">Voltar ao painel</a>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Novo servico</h3>
+              <p>Crie um item padrao para seu catalogo comercial.</p>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="servicoNome">Nome do servico</label>
+              <input id="servicoNome" placeholder="Ex.: implantacao, consultoria, manutencao">
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="servicoCategoria">Categoria</label>
+                <input id="servicoCategoria" placeholder="Categoria do servico">
+              </div>
+              <div class="field">
+                <label for="servicoPrazo">Prazo medio</label>
+                <input id="servicoPrazo" placeholder="Ex.: 3 dias">
+              </div>
+            </div>
+            <div class="field">
+              <label for="servicoValor">Valor base</label>
+              <input id="servicoValor" placeholder="0,00">
+            </div>
+            <div class="field">
+              <label for="servicoDescricao">Descricao</label>
+              <textarea id="servicoDescricao" placeholder="Explique escopo, cobertura e observacoes do servico"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" onclick="salvarServicoCatalogo()">Salvar servico</button>
+          </div>
+          <div id="msgServico" class="feedback"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Indicadores do catalogo</h3>
+              <p>Visao geral dos servicos cadastrados.</p>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric-card">
+              <span>Total de servicos</span>
+              <strong id="totalServicosCatalogo">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Categorias</span>
+              <strong id="totalCategoriasServico">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Ticket medio</span>
+              <strong id="mediaServico">R$ 0,00</strong>
+            </div>
+            <div class="metric-card">
+              <span>Status</span>
+              <strong>Ativo</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Servicos cadastrados</h3>
+            <p>Itens disponiveis para composicao de orcamentos, O.S. e vendas.</p>
+          </div>
+        </div>
+        <div id="listaServicos" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

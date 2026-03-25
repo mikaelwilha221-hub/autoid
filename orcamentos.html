@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Orcamentos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarOrcamentos()" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="menu">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Gestao empresarial</p>
+        </div>
+      </div>
+      <p class="menu-label">Navegacao principal</p>
+      <ul>
+        <li onclick="window.location.href='empresa.html'">Dashboard</li>
+        <li onclick="window.location.href='clientes.html'">Clientes</li>
+        <li onclick="window.location.href='servicos.html'">Servicos</li>
+        <li onclick="window.location.href='produtos.html'">Produtos</li>
+        <li class="ativo">Orcamentos</li>
+        <li onclick="window.location.href='financeiro.html'">Financeiro</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+      </ul>
+    </aside>
+
+    <main class="conteudo">
+      <section class="topo">
+        <div>
+          <h2 class="titulo-topo">Orcamentos e ordens</h2>
+          <p class="muted">Registre propostas comerciais, pedidos e andamento operacional.</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn-ghost" href="empresa.html">Voltar ao painel</a>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Novo orcamento</h3>
+              <p>Gere uma proposta com cliente, item principal e status atual.</p>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="orcamentoCliente">Cliente</label>
+              <input id="orcamentoCliente" placeholder="Nome do cliente ou empresa">
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="orcamentoTipo">Tipo</label>
+                <select id="orcamentoTipo">
+                  <option value="Servico">Servico</option>
+                  <option value="Produto">Produto</option>
+                  <option value="Misto">Misto</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="orcamentoStatus">Status</label>
+                <select id="orcamentoStatus">
+                  <option value="Em analise">Em analise</option>
+                  <option value="Aprovado">Aprovado</option>
+                  <option value="Em execucao">Em execucao</option>
+                  <option value="Finalizado">Finalizado</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="orcamentoItem">Item principal</label>
+              <input id="orcamentoItem" placeholder="Servico, produto ou composicao principal">
+            </div>
+            <div class="field">
+              <label for="orcamentoValor">Valor</label>
+              <input id="orcamentoValor" placeholder="0,00">
+            </div>
+            <div class="field">
+              <label for="orcamentoObservacao">Observacoes</label>
+              <textarea id="orcamentoObservacao" placeholder="Prazo, cobertura, etapa ou observacao comercial"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" onclick="salvarOrcamento()">Salvar orcamento</button>
+          </div>
+          <div id="msgOrcamento" class="feedback"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Resumo comercial</h3>
+              <p>Status atual da carteira de propostas e ordens.</p>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric-card">
+              <span>Total</span>
+              <strong id="totalOrcamentos">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Aprovados</span>
+              <strong id="orcamentosAprovados">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Em execucao</span>
+              <strong id="orcamentosExecucao">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Valor projetado</span>
+              <strong id="valorOrcamentos">R$ 0,00</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Carteira de orcamentos</h3>
+            <p>Registros comerciais prontos para acompanhamento.</p>
+          </div>
+        </div>
+        <div id="listaOrcamentos" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

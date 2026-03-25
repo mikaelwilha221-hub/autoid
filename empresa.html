@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Painel da Empresa</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/buttons.css">
+</head>
+<body class="app-body" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="menu">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Gestao empresarial</p>
+        </div>
+      </div>
+      <p class="menu-label">Navegacao principal</p>
+      <ul>
+        <li class="ativo">Dashboard</li>
+        <li onclick="window.location.href='clientes.html'">Clientes</li>
+        <li onclick="window.location.href='servicos.html'">Servicos</li>
+        <li onclick="window.location.href='produtos.html'">Produtos</li>
+        <li onclick="window.location.href='orcamentos.html'">Ordens de servico</li>
+        <li onclick="window.location.href='orcamentos.html'">Orcamentos</li>
+        <li onclick="window.location.href='financeiro.html'">Financeiro</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+        <li>Configuracoes</li>
+      </ul>
+    </aside>
+
+    <main class="conteudo">
+      <header class="topo">
+        <div>
+          <h2 class="titulo-topo">Area da empresa</h2>
+          <p class="muted">Visao executiva da operacao com foco em servicos, produtos, atendimento e produtividade.</p>
+        </div>
+        <div class="top-actions">
+          <button class="btn-ia">Assistente IA</button>
+          <a class="btn-ghost" href="#" onclick="api.logout('index.html'); return false;">Sair</a>
+        </div>
+      </header>
+
+      <div class="highlight" id="msgIA"></div>
+
+      <section class="stats">
+        <div class="stat">
+          <p>Faturamento</p>
+          <h3 id="fat"></h3>
+        </div>
+        <div class="stat">
+          <p>Clientes ativos</p>
+          <h3 id="cli"></h3>
+        </div>
+        <div class="stat">
+          <p>Servicos vendidos</p>
+          <h3 id="ser"></h3>
+        </div>
+        <div class="stat">
+          <p>Produtos cadastrados</p>
+          <h3 id="est"></h3>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Acoes rapidas</h3>
+              <p>Atalhos operacionais para vender, registrar e acompanhar a rotina.</p>
+            </div>
+          </div>
+          <div class="form-actions">
+            <a class="btn" href="cadastro.html">Novo cliente</a>
+            <a class="btn-secondary" href="servicos.html">Novo servico</a>
+            <a class="btn-secondary" href="produtos.html">Novo produto</a>
+            <a class="btn-secondary" href="orcamentos.html">Novo orcamento</a>
+          </div>
+        </div>
+
+        <div class="ia-box">
+          <div class="panel-header">
+            <div>
+              <h3>Leitura operacional</h3>
+              <p>Resumo rapido para priorizacao de atendimento.</p>
+            </div>
+          </div>
+          <div class="list-stack">
+            <div class="list-card">
+              <strong>Catalogo flexivel</strong>
+              <span class="muted">Cadastre servicos e produtos de qualquer segmento sem prender a operacao a um nicho unico.</span>
+            </div>
+            <div class="list-card">
+              <strong>Relacionamento ativo</strong>
+              <span class="muted">Clientes recorrentes merecem historico claro, financeiro organizado e comunicacao objetiva.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lista">
+        <div class="panel-header">
+          <div>
+            <h2 class="section-title">Ultimas movimentacoes</h2>
+            <p>Exemplos de registros recentes entre servicos, vendas e operacoes comerciais.</p>
+          </div>
+        </div>
+
+        <div class="list-stack">
+          <div class="os-card">
+            <div class="list-card-header">
+              <strong>Orcamento enviado</strong>
+              <span class="status success">Concluido</span>
+            </div>
+            <p>Cliente: Alpha Trade</p>
+          </div>
+
+          <div class="os-card">
+            <div class="list-card-header">
+              <strong>Servico em execucao</strong>
+              <span class="status warning">Em andamento</span>
+            </div>
+            <p>Cliente: Maria Souza</p>
+          </div>
+
+          <div class="os-card">
+            <div class="list-card-header">
+              <strong>Produto vendido</strong>
+              <span class="status info">Finalizado</span>
+            </div>
+            <p>Cliente: Pedro Santos</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+  <script>
+    carregarPainelEmpresa();
+  </script>
+</body>
+</html>

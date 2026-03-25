@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Cadastro do Usuario</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <section class="auth-panel">
+      <div class="brand-lockup">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Cadastro do usuario</p>
+        </div>
+      </div>
+      <span class="eyebrow">Portal flexivel</span>
+      <h1 class="title" style="font-size:clamp(2rem,4vw,3.1rem);margin-top:18px;">Um unico cadastro para quem contrata, presta ou opera dos dois lados.</h1>
+      <p class="section-text" style="margin-top:16px;">
+        Escolha se voce e PF ou PJ e defina como vai usar a plataforma. Esse perfil
+        ajuda o sistema a liberar os modulos certos sem limitar sua operacao futura.
+      </p>
+      <div class="auth-highlight">
+        <div class="highlight-card">
+          <strong>Cliente</strong>
+          <span class="muted">Ideal para quem quer contratar servicos, pesquisar empresas e acompanhar historicos.</span>
+        </div>
+        <div class="highlight-card">
+          <strong>Prestador</strong>
+          <span class="muted">Ideal para quem quer vender servicos ou produtos dentro da plataforma.</span>
+        </div>
+        <div class="highlight-card">
+          <strong>Ambos</strong>
+          <span class="muted">Para quem deseja contratar e tambem operar como prestador em um unico perfil.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-form">
+      <h2>Cadastrar usuario</h2>
+      <p>Preencha os dados iniciais para criar seu acesso na plataforma.</p>
+
+      <div class="tipo">
+        <button type="button" class="btn-secondary" onclick="selecionarTipo('pf')" id="btn-pf">PF</button>
+        <button type="button" class="btn-secondary" onclick="selecionarTipo('pj')" id="btn-pj">PJ</button>
+      </div>
+
+      <div class="field-group">
+        <div class="field">
+          <label for="nome">Nome ou razao social</label>
+          <input type="text" id="nome" placeholder="Nome ou razao social">
+        </div>
+        <div class="field">
+          <label for="documento">CPF ou CNPJ</label>
+          <input type="text" id="documento" placeholder="CPF ou CNPJ">
+        </div>
+        <div class="form-actions" style="margin-top:-6px;">
+          <button type="button" class="btn-secondary" id="buscarCnpjUsuario" onclick="buscarCnpjUsuario()">Buscar dados do CNPJ</button>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" placeholder="(00) 00000-0000">
+          </div>
+          <div class="field">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" placeholder="Sua cidade">
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" placeholder="UF">
+          </div>
+          <div class="field">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" placeholder="00000-000">
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="logradouro">Endereco</label>
+            <input type="text" id="logradouro" placeholder="Rua, avenida ou logradouro">
+          </div>
+          <div class="field">
+            <label for="numero">Numero</label>
+            <input type="text" id="numero" placeholder="Numero">
+          </div>
+        </div>
+        <div class="field">
+          <label for="bairro">Bairro</label>
+          <input type="text" id="bairro" placeholder="Bairro">
+        </div>
+        <div class="field">
+          <label for="complemento">Complemento</label>
+          <input type="text" id="complemento" placeholder="Sala, bloco, referencia ou complemento">
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="voce@autoid.com">
+        </div>
+        <div class="field">
+          <label for="perfilUso">Como voce vai usar a plataforma?</label>
+          <select id="perfilUso">
+            <option value="">Selecione um perfil</option>
+            <option value="cliente">Sou cliente</option>
+            <option value="prestador">Sou prestador</option>
+            <option value="ambos">Sou ambos</option>
+          </select>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Crie uma senha">
+          </div>
+          <div class="field">
+            <label for="confirmar">Confirmar senha</label>
+            <input type="password" id="confirmar" placeholder="Repita a senha">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" onclick="cadastrarUsuario()">Criar cadastro</button>
+        <a class="btn-ghost" href="index.html">Ja tenho acesso</a>
+      </div>
+      <p id="erro-login" class="erro-login"></p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="api.js"></script>
+  <script>
+    let tipoUsuario = "";
+
+    function selecionarTipo(tipo) {
+      tipoUsuario = tipo;
+      const nome = document.getElementById("nome");
+      const documento = document.getElementById("documento");
+      const btnPF = document.getElementById("btn-pf");
+      const btnPJ = document.getElementById("btn-pj");
+
+      if (tipo === "pf") {
+        nome.placeholder = "Nome completo";
+        documento.placeholder = "CPF";
+        btnPF.classList.add("ativo");
+        btnPJ.classList.remove("ativo");
+        return;
+      }
+
+      nome.placeholder = "Razao social";
+      documento.placeholder = "CNPJ";
+      btnPJ.classList.add("ativo");
+      btnPF.classList.remove("ativo");
+    }
+
+    async function cadastrarUsuario() {
+      const erro = document.getElementById("erro-login");
+      const nome = document.getElementById("nome").value.trim();
+      const documento = document.getElementById("documento").value.trim();
+      const telefone = document.getElementById("telefone").value.trim();
+      const cidade = document.getElementById("cidade").value.trim();
+      const estado = document.getElementById("estado").value.trim();
+      const cep = document.getElementById("cep").value.trim();
+      const logradouro = document.getElementById("logradouro").value.trim();
+      const numero = document.getElementById("numero").value.trim();
+      const bairro = document.getElementById("bairro").value.trim();
+      const complemento = document.getElementById("complemento").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const perfilUso = document.getElementById("perfilUso").value;
+      const senha = document.getElementById("senha").value;
+      const confirmar = document.getElementById("confirmar").value;
+
+      if (!tipoUsuario) {
+        erro.textContent = "Selecione se o cadastro sera PF ou PJ.";
+        return;
+      }
+
+      if (!nome || !documento || !telefone || !cidade || !estado || !cep || !logradouro || !numero || !bairro || !email || !perfilUso || !senha) {
+        erro.textContent = "Preencha todos os campos obrigatorios.";
+        return;
+      }
+
+      if ((perfilUso === "prestador" || perfilUso === "ambos") && (!logradouro || !numero || !bairro || !cidade || !estado || !cep)) {
+        erro.textContent = "Prestadores precisam informar endereco completo para serem localizados na plataforma.";
+        return;
+      }
+
+      if (senha !== confirmar) {
+        erro.textContent = "As senhas nao coincidem.";
+        return;
+      }
+
+      try {
+        await api.registerUser({
+          typePerson: tipoUsuario,
+          name: nome,
+          document: documento,
+          phone: telefone,
+          city: cidade,
+          state: estado,
+          zipCode: cep,
+          street: logradouro,
+          number,
+          district: bairro,
+          complement: complemento,
+          email,
+          roleProfile: perfilUso,
+          password: senha
+        });
+
+        localStorage.setItem("usuarioPortal", JSON.stringify({
+          tipoPessoa: tipoUsuario,
+          nome,
+          documento,
+          telefone,
+          cidade,
+          estado,
+          cep,
+          logradouro,
+          numero,
+          bairro,
+          complemento,
+          email,
+          perfilUso,
+          senha
+        }));
+
+        window.location.href = "index.html";
+      } catch (error) {
+        localStorage.setItem("usuarioPortal", JSON.stringify({
+          tipoPessoa: tipoUsuario,
+          nome,
+          documento,
+          telefone,
+          cidade,
+          estado,
+          cep,
+          logradouro,
+          numero,
+          bairro,
+          complemento,
+          email,
+          perfilUso,
+          senha
+        }));
+        window.location.href = "index.html";
+      }
+    }
+
+    function buscarCnpjUsuario() {
+      if (tipoUsuario !== "pj") {
+        document.getElementById("erro-login").textContent = "Selecione PJ para consultar CNPJ.";
+        return;
+      }
+      buscarDadosCnpj({
+        documentoId: "documento",
+        nomeId: "nome",
+        emailId: "email",
+        telefoneId: "telefone",
+        cidadeId: "cidade",
+        estadoId: "estado",
+        cepId: "cep",
+        logradouroId: "logradouro",
+        numeroId: "numero",
+        bairroId: "bairro",
+        complementoId: "complemento",
+        errorId: "erro-login",
+        buttonId: "buscarCnpjUsuario"
+      });
+    }
+  </script>
+</body>
+</html>

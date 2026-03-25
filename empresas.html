@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Empresas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarEmpresas()" data-auth="true" data-roles="cliente,prestador,ambos">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Descoberta de empresas</p>
+        </div>
+      </div>
+      <ul>
+        <li onclick="window.location.href='dashboard.html'">Portal do usuario</li>
+        <li class="active">Empresas</li>
+        <li onclick="window.location.href='clientes.html'">Cadastros locais</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-title">
+          <h1>Empresas e prestadores</h1>
+          <p>Explore empresas por segmento, servico principal e avaliacao para encontrar a melhor opcao.</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn-secondary" href="cadastro-usuario.html">Atualizar perfil</a>
+          <a class="btn-ghost" href="dashboard.html">Voltar</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="field-grid">
+          <div class="field">
+            <label for="buscaEmpresa">Buscar empresa</label>
+            <input id="buscaEmpresa" type="text" placeholder="Nome, segmento ou servico">
+          </div>
+          <div class="field">
+            <label for="filtroSegmento">Segmento</label>
+            <select id="filtroSegmento" onchange="carregarEmpresas()">
+              <option value="">Todos os segmentos</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn" onclick="carregarEmpresas()">Aplicar filtros</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Catalogo ativo</h3>
+            <p>Empresas registradas ou seed inicial da plataforma.</p>
+          </div>
+        </div>
+        <div id="listaEmpresas" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

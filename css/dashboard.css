@@ -1,0 +1,10 @@
+.dashboard {
+  display: contents;
+}
+
+.os-card p,
+.ia-box p,
+.highlight p {
+  color: var(--muted);
+  margin-top: 6px;
+}

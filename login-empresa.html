@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Login da Empresa</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <section class="auth-panel">
+      <div class="brand-lockup">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Painel operacional da empresa</p>
+        </div>
+      </div>
+      <span class="eyebrow">Operacao centralizada</span>
+      <h1 class="title" style="font-size:clamp(2rem,4vw,3.1rem);margin-top:18px;">Gerencie clientes, servicos e indicadores em um unico ambiente.</h1>
+      <p class="section-text" style="margin-top:16px;">
+        O painel da empresa concentra atendimento, historico, ordens de servico e faturamento
+        com um visual mais consistente e profissional.
+      </p>
+      <div class="auth-highlight">
+        <div class="highlight-card">
+          <strong>Visao executiva</strong>
+          <span class="muted">Indicadores e acoes rapidas para acompanhar a rotina operacional.</span>
+        </div>
+        <div class="highlight-card">
+          <strong>Cadastro unificado</strong>
+          <span class="muted">Clientes, historico e relatorios dentro da mesma identidade visual.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-form">
+      <h2>Area da empresa</h2>
+      <p>Entre com os dados cadastrados para acessar o painel administrativo.</p>
+      <div class="field-group">
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="empresa@autoid.com">
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" placeholder="Digite sua senha">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn" onclick="login()">Entrar</button>
+        <a class="btn-ghost" href="cadastro-usuario.html">Criar cadastro unico</a>
+      </div>
+      <p id="erro-login" class="erro-login"></p>
+      <p class="cadastro-link">Ainda nao possui conta? <a href="cadastro-usuario.html">Use o cadastro unico da plataforma</a>.</p>
+    </section>
+  </div>
+
+  <script src="api.js"></script>
+  <script>
+    async function login() {
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value.trim();
+      const erro = document.getElementById("erro-login");
+      const box = document.querySelector(".auth-form");
+
+      try {
+        const data = await api.login({ email, password: senha });
+        if (data.user.roleProfile !== "prestador" && data.user.roleProfile !== "ambos") {
+          erro.textContent = "Este acesso exige perfil de prestador ou ambos.";
+          return;
+        }
+        localStorage.setItem("logado", "true");
+        localStorage.setItem("usuarioPortal", JSON.stringify({
+          email: data.user.email,
+          nome: data.user.name,
+          tipoPessoa: data.user.typePerson,
+          perfilUso: data.user.roleProfile
+        }));
+        window.location.href = "empresa.html";
+      } catch (error) {
+        erro.textContent = "E-mail ou senha incorretos.";
+        box.classList.add("tremer");
+        setTimeout(() => box.classList.remove("tremer"), 300);
+      }
+    }
+  </script>
+</body>
+</html>

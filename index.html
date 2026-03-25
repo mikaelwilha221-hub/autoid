@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Portal do Usuario</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <section class="auth-panel">
+      <div class="brand-lockup">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Portal do usuario</p>
+        </div>
+      </div>
+      <span class="eyebrow">Cadastro unico</span>
+      <h1 class="title" style="font-size:clamp(2rem,4vw,3.1rem);margin-top:18px;">Um portal para contratar servicos, prestar servicos ou fazer os dois.</h1>
+      <p class="section-text" style="margin-top:16px;">
+        O portal do usuario serve para PF e PJ. Aqui o usuario pode manter um unico cadastro
+        e escolher se vai usar a plataforma como cliente, prestador ou ambos.
+      </p>
+      <div class="auth-highlight">
+        <div class="highlight-card">
+          <strong>Perfil flexivel</strong>
+          <span class="muted">Defina se voce vai contratar, prestar ou operar nos dois modelos.</span>
+        </div>
+        <div class="highlight-card">
+          <strong>Base unificada</strong>
+          <span class="muted">Mantenha dados, historico, empresas, servicos e movimentacoes no mesmo ambiente.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-form">
+      <h2>Entrar no portal do usuario</h2>
+      <p>Use seu cadastro para acessar empresas, acompanhar servicos e operar conforme seu perfil de uso.</p>
+      <div class="field-group">
+        <div class="field">
+          <label for="usuario">E-mail</label>
+          <input id="usuario" placeholder="Digite seu e-mail">
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" placeholder="Digite sua senha">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn" onclick="login()">Entrar</button>
+        <a class="btn-secondary" href="cadastro-usuario.html">Criar cadastro</a>
+        <a class="btn-ghost" href="home.html">Voltar para a home</a>
+      </div>
+      <p id="erro-login" class="erro-login"></p>
+      <p class="cadastro-link">Ainda nao possui conta? <a href="cadastro-usuario.html">Cadastre-se como usuario</a>.</p>
+    </section>
+  </div>
+
+  <script src="api.js"></script>
+  <script>
+    async function login() {
+      const user = document.getElementById("usuario").value.trim();
+      const pass = document.getElementById("senha").value.trim();
+      const erro = document.getElementById("erro-login");
+      erro.textContent = "";
+
+      try {
+        const data = await api.login({ email: user, password: pass });
+        localStorage.setItem("logado", "true");
+        localStorage.setItem("usuarioPortal", JSON.stringify({
+          email: data.user.email,
+          nome: data.user.name,
+          tipoPessoa: data.user.typePerson,
+          perfilUso: data.user.roleProfile
+        }));
+        window.location.href = data.user.roleProfile === "prestador" || data.user.roleProfile === "ambos"
+          ? "empresa.html"
+          : "dashboard.html";
+      } catch (error) {
+        erro.textContent = "E-mail ou senha incorretos.";
+      }
+    }
+  </script>
+</body>
+</html>

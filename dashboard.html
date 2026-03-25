@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Dashboard do Usuario</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" data-auth="true" data-roles="cliente,prestador,ambos">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Ambiente do usuario</p>
+        </div>
+      </div>
+      <ul>
+        <li class="active">Dashboard</li>
+        <li onclick="window.location.href='empresas.html'">Empresas</li>
+        <li onclick="window.location.href='cadastro-usuario.html'">Meu cadastro</li>
+        <li onclick="window.location.href='home.html'">Pagina inicial</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-title">
+          <h1>Portal do usuario</h1>
+          <p>Acompanhe seu perfil, encontre empresas e use a plataforma como cliente, prestador ou ambos.</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn-secondary" href="cadastro-usuario.html">Atualizar cadastro base</a>
+          <a class="btn-ghost" href="#" onclick="api.logout('index.html'); return false;">Sair</a>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <div class="metric-card">
+          <span>Tipo de cadastro</span>
+          <strong id="dashTipoPessoa">--</strong>
+        </div>
+        <div class="metric-card">
+          <span>Perfil de uso</span>
+          <strong id="dashPerfilUso">--</strong>
+        </div>
+        <div class="metric-card">
+          <span>Empresas favoritas</span>
+          <strong id="dashEmpresas">12</strong>
+        </div>
+        <div class="metric-card">
+          <span>Status</span>
+          <strong id="dashStatus">Ativo</strong>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Buscar empresas</h3>
+              <p>Use essa area para encontrar empresas, prestadores e servicos cadastrados na plataforma.</p>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="busca">Pesquisa</label>
+              <input id="busca" type="text" placeholder="Nome da empresa, servico ou segmento">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" onclick="buscarCliente()">Buscar agora</button>
+          </div>
+          <div id="resultado" class="feedback"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Como essa conta pode operar</h3>
+              <p>O sistema adapta a experiencia conforme o perfil escolhido no cadastro.</p>
+            </div>
+          </div>
+          <div class="list-stack">
+            <div class="list-card">
+              <strong>Modo cliente</strong>
+              <span class="muted">Pesquisar empresas, contratar servicos, acompanhar historico e avaliar atendimentos.</span>
+            </div>
+            <div class="list-card">
+              <strong>Modo prestador</strong>
+              <span class="muted">Cadastrar servicos ou produtos, receber solicitacoes e estruturar a operacao comercial.</span>
+            </div>
+            <div class="list-card">
+              <strong>Modo ambos</strong>
+              <span class="muted">Permite contratar servicos e tambem operar como empresa ou prestador no mesmo ecossistema.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

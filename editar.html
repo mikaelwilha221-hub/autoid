@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Editar Cliente</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarEdicao()" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Atualizacao de cadastro</p>
+        </div>
+      </div>
+      <ul>
+        <li onclick="window.location.href='empresa.html'">Dashboard</li>
+        <li class="active" onclick="window.location.href='clientes.html'">Clientes</li>
+        <li onclick="window.location.href='servicos.html'">Servicos</li>
+        <li onclick="window.location.href='produtos.html'">Produtos</li>
+        <li onclick="window.location.href='orcamentos.html'">Orcamentos</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-title">
+          <h1>Editar cliente</h1>
+          <p>Atualize as informacoes para manter a base consistente e confiavel.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="field-grid">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" placeholder="Nome completo">
+          </div>
+          <div class="field">
+            <label for="cpf">Documento</label>
+            <input id="cpf" placeholder="CPF, CNPJ ou documento principal">
+          </div>
+          <div class="field">
+            <label for="placa">Identificador</label>
+            <input id="placa" placeholder="Placa, codigo interno ou referencia">
+          </div>
+          <div class="field">
+            <label for="veiculo">Ativo ou item relacionado</label>
+            <input id="veiculo" placeholder="Veiculo, equipamento, produto ou item vinculado">
+          </div>
+          <div class="field">
+            <label for="servico">Servico ou demanda principal</label>
+            <input id="servico" placeholder="Servico, produto ou demanda principal">
+          </div>
+          <div class="field">
+            <label for="garantia">Garantia</label>
+            <input id="garantia" placeholder="Prazo, cobertura ou condicao comercial">
+          </div>
+        </div>
+
+        <div class="form-actions" style="margin-top:18px;">
+          <button class="btn" onclick="salvarEdicao()">Salvar alteracoes</button>
+          <a class="btn-ghost" href="clientes.html">Voltar</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

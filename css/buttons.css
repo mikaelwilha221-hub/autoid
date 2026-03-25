@@ -1,0 +1,13 @@
+.btn-ia {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ia::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(53, 212, 255, 0.08), transparent 45%);
+  pointer-events: none;
+}

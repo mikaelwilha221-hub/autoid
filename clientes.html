@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Clientes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarClientes()" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Gestao de clientes</p>
+        </div>
+      </div>
+      <ul>
+        <li onclick="window.location.href='empresa.html'">Dashboard</li>
+        <li class="active">Clientes</li>
+        <li onclick="window.location.href='servicos.html'">Servicos</li>
+        <li onclick="window.location.href='produtos.html'">Produtos</li>
+        <li onclick="window.location.href='orcamentos.html'">Orcamentos</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+        <li onclick="window.location.href='financeiro.html'">Financeiro</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-title">
+          <h1>Base de clientes</h1>
+          <p>Cadastros centralizados com acesso rapido a edicao, consulta e historico.</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn" href="cadastro.html">Novo cliente</a>
+          <a class="btn-ghost" href="empresa.html">Voltar ao dashboard</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Clientes cadastrados</h3>
+            <p>Lista dinamica baseada nos dados salvos no navegador.</p>
+          </div>
+        </div>
+        <div id="listaClientes" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

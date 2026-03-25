@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoID | Perfil do Cliente</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body" onload="carregarCliente()" data-auth="true" data-roles="prestador,ambos">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand-lockup" style="margin-bottom:24px;">
+        <img src="img/logo.png" alt="Logo AutoID">
+        <div>
+          <div class="brand-name">AutoID</div>
+          <p class="muted">Perfil do cliente</p>
+        </div>
+      </div>
+      <ul>
+        <li onclick="window.location.href='empresa.html'">Dashboard</li>
+        <li class="active" onclick="window.location.href='clientes.html'">Clientes</li>
+        <li onclick="window.location.href='servicos.html'">Servicos</li>
+        <li onclick="window.location.href='produtos.html'">Produtos</li>
+        <li onclick="window.location.href='orcamentos.html'">Orcamentos</li>
+        <li onclick="window.location.href='relatorio.html'">Relatorios</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-title">
+          <h1>Dados do cliente</h1>
+          <p>Resumo do cadastro e historico de servicos, produtos ou atendimentos vinculados.</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn-ghost" href="clientes.html">Voltar para clientes</a>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Resumo cadastral</h3>
+              <p>Identificacao principal do cadastro e dos itens relacionados.</p>
+            </div>
+          </div>
+          <div id="dadosCliente"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Novo registro</h3>
+              <p>Adicione um servico, produto, atendimento ou movimentacao ao historico desse cadastro.</p>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="novoServico">Descricao</label>
+              <input id="novoServico" placeholder="Descricao do servico, produto ou atendimento">
+            </div>
+            <div class="field">
+              <label for="valor">Valor</label>
+              <input id="valor" placeholder="0,00">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" onclick="adicionarServico()">Adicionar ao historico</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Historico de registros</h3>
+            <p>Registros em ordem de lancamento conforme a base salva no navegador.</p>
+          </div>
+        </div>
+        <div id="historico" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
